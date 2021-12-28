@@ -1,0 +1,98 @@
+<h1 style="text-align:center;">Slots Machine</h1>
+<br>
+<h2 id="balance">Your balance: 100 euros</h2>
+<div style="display:flex; margin: 0 auto; width:75%; height:55%; border:2px solid black; padding:5px;">
+<div id="slot1" style="width:90%; height:100%; text-align:center;"></div>
+<div id="slot2" style="width:90%; height:100%; text-align:center;"></div>
+<div id="slot3" style="width:90%; height:100%; text-align:center;"></div>
+</div>
+<br>
+<button onclick="spinnerFunction()" style="margin-left: 45%; width:50px; height:35px;">ROLL</button>
+<h1>Payouts:</h1>
+<br>
+<div style="background:lightgray; margin 0 auto; height:100px; width:383px; border: 1px solid black;">
+<table>
+<tr>
+<th style="border:1px solid black;">3x Bananas<img src="banana.png" height="50"></th>
+<th style="border:1px solid black;">3x Oranges<img src="orange.png" height="50"></th>
+<th style="border:1px solid black;">3x Apples<img src="apple.png" height="50"></th>
+</tr>
+<tr>
+<td style="border:1px solid black;">100 euros</td>
+<td style="border:1px solid black;">50 euros</td>
+<td style="border:1px solid black;">25 euros</td>
+</tr>
+</table>
+</div>
+<script>
+
+class Results{
+constructor(result1, result2, result3){
+this.result1 = result1;
+this.result2 = result2;
+this.result3 = result3;
+}
+}
+var balance = 100;
+function spinnerFunction(){
+if (balance <= 9) {
+alert("insufficient funds, please refresh the page to reset your money.");
+return;
+}
+else{
+const resultShower = new Results(Math.floor(Math.random() * 3) + 1, Math.floor(Math.random() * 3) + 1, Math.floor(Math.random() * 3) + 1);
+if (resultShower.result1 == 1){
+ var slotresult1 = "url('apple.png') no-repeat";
+}
+if (resultShower.result1 == 2){
+ var slotresult1 = "url('banana.png') no-repeat";
+}
+if (resultShower.result1 == 3){
+ var slotresult1 = "url('orange.png') no-repeat";
+}
+if (resultShower.result2 == 1){
+ var slotresult2 = "url('apple.png') no-repeat";
+}
+if (resultShower.result2 == 2){
+ var slotresult2 = "url('banana.png') no-repeat";
+}
+if (resultShower.result2 == 3){
+ var slotresult2 = "url('orange.png') no-repeat";
+}
+if (resultShower.result3 == 1){
+ var slotresult3 = "url('apple.png') no-repeat";
+}
+if (resultShower.result3 == 2){
+ var slotresult3 = "url('banana.png') no-repeat";
+}
+if (resultShower.result3 == 3){
+ var slotresult3 = "url('orange.png') no-repeat";
+}
+function winnings(){
+if (resultShower.result1 == 2 && resultShower.result2 == 2 && resultShower.result3 == 2) {
+balance = balance + 100;
+alert("Congratulations! You just won 100 Euros!!");
+}
+if (resultShower.result1 == 3 && resultShower.result2 == 3 && resultShower.result3 == 3) {
+balance = balance + 50;
+alert("Congratulations! You just won 50 Euros!!");
+}
+if (resultShower.result1 == 1 && resultShower.result2 == 1 && resultShower.result3 == 1) {
+balance = balance + 25;
+alert("Congratulations! You just won 25 Euros!!");
+}
+else{
+balance = balance - 10;
+}
+}
+document.getElementById("slot1").style.background = slotresult1;
+document.getElementById("slot1").style.backgroundSize = "cover";
+document.getElementById("slot2").style.background = slotresult2;
+document.getElementById("slot2").style.backgroundSize = "cover";
+document.getElementById("slot3").style.background = slotresult3;
+document.getElementById("slot3").style.backgroundSize = "cover";
+winnings();
+document.getElementById("balance").innerHTML = "Your balance: " + balance + " euros";
+}
+}
+</script>
